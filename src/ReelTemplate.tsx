@@ -1,8 +1,10 @@
 import React from 'react';
 import {
 	AbsoluteFill,
+	Audio,
 	interpolate,
 	spring,
+	staticFile,
 	useCurrentFrame,
 	useVideoConfig,
 } from 'remotion';
@@ -14,6 +16,8 @@ const FONT = "'Montserrat', 'Arial Black', Helvetica, Arial, sans-serif";
 const PAD_LEFT = 72;
 const PAD_RIGHT = 60;
 const FONT_SIZE = 72;
+// Set to false while public/background.mp3 is not yet in place
+const AUDIO_ENABLED = true;
 
 interface LineConfig {
 	text: string;
@@ -155,6 +159,11 @@ export const ReelTemplate: React.FC<ReelContent> = ({
 			}}
 		>
 			<style>{`@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;0,700;0,900;1,900&display=swap');`}</style>
+
+			{/* Background music — place your track at public/background.mp3 */}
+			{AUDIO_ENABLED && (
+				<Audio src={staticFile('background.mp3')} volume={0.28} />
+			)}
 
 			{/* Background watermark */}
 			<div
